@@ -1,7 +1,10 @@
 
 import React, {useEffect, useRef, useState} from "react";
+import propTypes from "prop-types";
+import './App.css';
 
-function Item({productName, closingTime, closingDate, description}) {
+
+function Item({id, year, title, summary, poster, date_uploaded, genres}) {
     
     const [timerDays, setTimerDays] = useState('00');
     const [timerHours, setTimerHours] = useState('00');
@@ -10,11 +13,11 @@ function Item({productName, closingTime, closingDate, description}) {
     
     let interval = useRef()
     const starttimer = () => {
-        const CountdownDate = new Date(closingTime).getTime();
+        const CountdownDate = new Date(date_uploaded).getTime();
   
         interval = setInterval(() =>{
             const now = new Date().getTime()
-            const distance = CountdownDate - now
+            const distance = now - CountdownDate 
   
             const days = Math.floor(distance / (1000 * 60 * 60 * 24))
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)))
@@ -38,14 +41,29 @@ function Item({productName, closingTime, closingDate, description}) {
       return () => {
         clearInterval(interval.current)
       }
-    }, );
+    }, ); 
     return (
-    <div class="item">
-        <h3 class="item__productName">제품명 : {productName}</h3>
-        <p class="item__description">제품설명 : {description}</p>
-        <h5 class="item__closingTime">상품 마감일:{closingTime}</h5>
-        <p>남은 시간 : {timerDays}일{timerHours}시{timerMinutes}분{timerSeconds}초</p>
-    </div>
+        <div className="movie">
+        <img src={poster} alt={title} title={title}/>
+        <div className="movie__data">
+            <h3 className="movie__title">{title}</h3>
+            <h5 className="movie__year">{year}</h5>
+            <p className="movie__summary">"{summary.slice(0,140)}..."</p>
+            <ul className="movie__genres">{genres.map((genre, index) => (
+                <li key={index} className="genres__genre">{genre}</li>))}</ul>
+            <p>{timerDays}:{timerHours}:{timerMinutes}:{timerSeconds}</p>
+        </div>
+        </div>
     )
+}
+
+Item.propTypes = {
+  id : propTypes.number.isRequired,
+  year : propTypes.number.isRequired,
+  title : propTypes.string.isRequired,
+  summary : propTypes.string.isRequired,
+  poster : propTypes.string.isRequired,
+  genres : propTypes.arrayOf(propTypes.string).isRequired
+
 }
 export default Item
