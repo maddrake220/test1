@@ -11,6 +11,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
   },
@@ -37,9 +38,9 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "last 1 Edge version"
     ]
-    
   },
-  "homepage" : "https://maddrake220.github.io/test1"
+  "homepage": "https://maddrake220.github.io/test1"
 }

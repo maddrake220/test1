@@ -1,7 +1,8 @@
 
 import React, {useEffect, useRef, useState} from "react";
+import { Link } from "react-router-dom";
 import propTypes from "prop-types";
-import './App.css';
+import './item.css';
 
 
 function Item({id, year, title, summary, poster, date_uploaded, genres}) {
@@ -43,6 +44,16 @@ function Item({id, year, title, summary, poster, date_uploaded, genres}) {
       }
     }, ); 
     return (
+      <Link to={{
+        pathname: "/item-detail",
+        state: {
+          year,
+          title,
+          summary,
+          poster,
+          genres
+        }
+      }}>
         <div className="movie">
         <img src={poster} alt={title} title={title}/>
         <div className="movie__data">
@@ -54,7 +65,7 @@ function Item({id, year, title, summary, poster, date_uploaded, genres}) {
             <p>{timerDays}:{timerHours}:{timerMinutes}:{timerSeconds}</p>
         </div>
         </div>
-    )
+    </Link>)
 }
 
 Item.propTypes = {
