@@ -77,4 +77,6 @@ Item.propTypes = {
   genres : propTypes.arrayOf(propTypes.string).isRequired
 
 }
+
+
 export default Item
